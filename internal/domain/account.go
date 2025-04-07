@@ -26,7 +26,7 @@ func generateAPIKey() string {
 	return hex.EncodeToString(b)
 }
 
-func newAccount(name, email string) *Account {
+func NewAccount(name, email string) *Account {
 	account := &Account{
 		ID:        uuid.New().String(),
 		Name:      name,
