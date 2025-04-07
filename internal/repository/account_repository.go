@@ -40,7 +40,7 @@ func (r *AccountRepository) Save(account *domain.Account) error {
 	return nil
 }
 
-func (r *AccountRepository) FindByApiKey(apiKey string) (*domain.Account, error) {
+func (r *AccountRepository) FindByAPIKey(apiKey string) (*domain.Account, error) {
 	var account domain.Account
 	var createdAt, updatedAt time.Time
 

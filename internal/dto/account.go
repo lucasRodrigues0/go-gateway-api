@@ -21,6 +21,18 @@ type AccountOutput struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func ToAccountOutput(input *domain.Account) *domain.Account {
+func ToAccount(input *CreateAccountInput) *domain.Account {
 	return domain.NewAccount(input.Name, input.Email)
+}
+
+func FromAccount(account *domain.Account) *AccountOutput {
+	return &AccountOutput{
+		ID:        account.ID,
+		Name:      account.Name,
+		Email:     account.Email,
+		Balance:   account.Balance,
+		APIKey:    account.APIKey,
+		CreatedAt: account.CreatedAt,
+		UpdatedAt: account.UpdatedAt,
+	}
 }
