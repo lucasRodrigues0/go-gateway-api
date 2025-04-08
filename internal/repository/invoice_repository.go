@@ -63,7 +63,7 @@ func (r *InvoiceRepository) FindById(id string) (*domain.Invoice, error) {
 }
 
 // FindByAccountId busca todas as faturas de um determinado accountID
-func (r *InvoiceRepository) FindByAccountID(accountID string) ([]*domain.Invoice, error) {
+func (r *InvoiceRepository) FindByAccountID(accountID string) (*[]domain.Invoice, error) {
 	rows, err := r.db.Query(`
 	SELECT id, account_id, amount, status, description, payment_type, card_last_digits, created_at, updated_at 
 	FROM invoices 
@@ -75,7 +75,7 @@ func (r *InvoiceRepository) FindByAccountID(accountID string) ([]*domain.Invoice
 
 	defer rows.Close()
 
-	var invoices []*domain.Invoice
+	var invoices []domain.Invoice
 
 	for rows.Next() {
 		var invoice domain.Invoice
@@ -84,10 +84,10 @@ func (r *InvoiceRepository) FindByAccountID(accountID string) ([]*domain.Invoice
 			return nil, err
 		}
 
-		invoices = append(invoices, &invoice)
+		invoices = append(invoices, invoice)
 	}
 
-	return invoices, nil
+	return &invoices, nil
 }
 
 func (r *InvoiceRepository) UpdateStatus(invoice *domain.Invoice) error {
