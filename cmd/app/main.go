@@ -21,8 +21,8 @@ func getEnv(key, defaultValue string) string {
 }
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("ENV") != "production" {
+		_ = godotenv.Load()
 	}
 
 	connStr := fmt.Sprintf(
